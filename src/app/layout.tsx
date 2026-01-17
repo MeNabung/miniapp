@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   },
   other: {
     "fc:frame": "vNext",
+    "base:app_id": "696b4987f22fe462e74c1146",
   },
 };
 
