@@ -41,18 +41,33 @@ export function Providers({ children }: ProvidersProps) {
   useEffect(() => {
     const init = async () => {
       try {
-        const inMiniApp = await sdk.isInMiniApp();
+        // Add timeout to prevent hanging
+        const timeoutPromise = new Promise<boolean>((_, reject) =>
+          setTimeout(() => reject(new Error("SDK timeout")), 3000)
+        );
+
+        const inMiniApp = await Promise.race([
+          sdk.isInMiniApp(),
+          timeoutPromise
+        ]).catch(() => false);
+
         if (inMiniApp) {
-          // Signal to the host that the app is ready
-          await sdk.actions.ready();
+          // Signal to the host that the app is ready IMMEDIATELY
+          sdk.actions.ready();
 
-          // Get context
-          const context = await sdk.context;
-
-          setFarcasterState({
-            context,
-            isInMiniApp: true,
-            isReady: true,
+          // Get context (don't await, just set it when ready)
+          sdk.context.then((context) => {
+            setFarcasterState({
+              context,
+              isInMiniApp: true,
+              isReady: true,
+            });
+          }).catch(() => {
+            setFarcasterState({
+              context: null,
+              isInMiniApp: true,
+              isReady: true,
+            });
           });
         } else {
           // Not in mini-app, still mark as ready for web preview
