@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAccount, useChainId } from "wagmi";
 import { ConnectWallet } from "@coinbase/onchainkit/wallet";
 import { Send, Loader2, Sparkles } from "lucide-react";
+import { Markdown } from "@/components/ui/markdown";
 import {
   useIDRXBalance,
   useUserPosition,
@@ -251,9 +252,7 @@ export default function ChatPage() {
           >
             {message.role === "assistant" ? (
               <div className="max-w-[85%] bg-white border border-border rounded-2xl rounded-tl-md px-4 py-3">
-                <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">
-                  {message.content}
-                </p>
+                <Markdown content={message.content} />
               </div>
             ) : (
               <div className="max-w-[85%] bg-teal text-white rounded-2xl rounded-tr-md px-4 py-3">
