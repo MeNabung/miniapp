@@ -1,0 +1,21 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "MeNabung",
+    "homeUrl": "https://menabung-miniapp.vercel.app",
+    "iconUrl": "https://menabung-miniapp.vercel.app/icon-1024.png",
+    "splashImageUrl": "https://menabung-miniapp.vercel.app/splash-200.png",
+    "splashBackgroundColor": "#FAF7F2",
+    "primaryCategory": "finance",
+    "tags": ["savings", "defi", "indonesia", "ai"],
+    "subtitle": "AI DeFi Savings",
+    "description": "AI-powered DeFi savings advisor for IDRX on Base. Chat, get risk-profiled, and auto-allocate your savings.",
+    "tagline": "Save smarter with AI",
+    "heroImageUrl": "https://menabung-miniapp.vercel.app/hero-1200x630.png"
+  }
+}

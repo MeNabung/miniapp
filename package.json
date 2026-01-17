@@ -9,9 +9,17 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@coinbase/onchainkit": "^1.1.2",
+    "@farcaster/miniapp-sdk": "^0.2.1",
+    "@tanstack/react-query": "^5.90.18",
+    "lucide-react": "^0.562.0",
+    "motion": "^12.26.2",
     "next": "16.1.3",
+    "openai": "^6.16.0",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "viem": "^2.44.4",
+    "wagmi": "^2.16.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

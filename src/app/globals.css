@@ -1,26 +1,241 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * MeNabung Mini-App Design System
+ * Indonesian Batik-Inspired Financial Garden
+ * Mobile-First Optimized
+ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core palette */
+  --teal: #0D4F4F;
+  --teal-light: #1A6B6B;
+  --teal-dark: #083838;
+  --gold: #C4A35A;
+  --gold-light: #D4B76A;
+  --gold-dark: #A88A4A;
+  --cream: #FAF7F2;
+  --cream-dark: #F0EBE3;
+  --terracotta: #B85C38;
+  --terracotta-light: #D06B45;
+
+  /* Semantic colors */
+  --radius: 0.75rem;
+  --background: var(--cream);
+  --foreground: #1A1A1A;
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A1A;
+  --primary: var(--teal);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--cream-dark);
+  --secondary-foreground: var(--teal);
+  --muted: #F5F2ED;
+  --muted-foreground: #6B6B6B;
+  --accent: var(--gold);
+  --accent-foreground: #1A1A1A;
+  --destructive: #DC2626;
+  --border: #E5E0D8;
+  --input: #E5E0D8;
+  --ring: var(--teal);
+
+  /* Chart colors */
+  --chart-1: var(--teal);
+  --chart-2: var(--gold);
+  --chart-3: var(--terracotta);
+  --chart-4: #6B8E7B;
+  --chart-5: #8B7355;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-teal: var(--teal);
+  --color-teal-light: var(--teal-light);
+  --color-teal-dark: var(--teal-dark);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+  --color-terracotta: var(--terracotta);
+  --color-terracotta-light: var(--terracotta-light);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Typography - Mobile optimized */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent pull-to-refresh on mobile */
+  overscroll-behavior-y: contain;
+}
+
+h1, h2, h3, .font-display {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+}
+
+/* Mobile-first card styling - flat with borders */
+.card-mobile {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* Touch-optimized shadows (minimal) */
+.shadow-card {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Active states for touch (instead of hover) */
+.touch-active:active {
+  opacity: 0.7;
+  transform: scale(0.98);
+}
+
+/* Text utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Safe areas for notch/home indicator */
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Minimum touch targets (44px) */
+@media (hover: none) and (pointer: coarse) {
+  button, a, [role="button"] {
+    min-height: 44px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom scrollbar - hidden for mobile feel */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Hide scrollbars but keep functionality */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Bottom nav safe area */
+.bottom-nav-safe {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem);
+}
+
+/* Dark mode */
+.dark {
+  --background: #0A2E2E;
+  --foreground: #F5F2ED;
+  --card: #0D3D3D;
+  --card-foreground: #F5F2ED;
+  --popover: #0D3D3D;
+  --popover-foreground: #F5F2ED;
+  --primary: var(--gold);
+  --primary-foreground: #0A2E2E;
+  --secondary: #1A4545;
+  --secondary-foreground: #F5F2ED;
+  --muted: #1A4545;
+  --muted-foreground: #A0A0A0;
+  --accent: var(--gold);
+  --accent-foreground: #0A2E2E;
+  --border: #1A4545;
+  --input: #1A4545;
+  --ring: var(--gold);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* OnchainKit Connect Button Overrides */
+[data-testid="ockConnectButton"],
+button[class*="ock-connect"] {
+  background-color: var(--teal) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.75rem !important;
+  font-weight: 500 !important;
+  padding: 0.75rem 1rem !important;
+  min-height: 44px !important;
+}
+
+[data-testid="ockConnectButton"]:active,
+button[class*="ock-connect"]:active {
+  background-color: var(--teal-dark) !important;
+  transform: scale(0.98);
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
