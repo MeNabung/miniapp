@@ -55,6 +55,8 @@ export function saveStrategyFromProfile(riskProfile: RiskProfile): void {
   localStorage.setItem('riskProfile', riskProfile);
 }
 
+const CUSTOM_ALLOCATION_KEY = 'menabung_custom_allocation';
+
 /**
  * Save custom allocation (keeps current risk profile)
  */
@@ -65,6 +67,46 @@ export function saveCustomAllocation(allocation: StrategyAllocation): void {
     allocation,
     updatedAt: Date.now(),
   });
+
+  // Also save as custom allocation for deposit page
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem(CUSTOM_ALLOCATION_KEY, JSON.stringify(allocation));
+    } catch (error) {
+      console.error('Failed to save custom allocation:', error);
+    }
+  }
+}
+
+/**
+ * Get custom allocation from AI chat (if any)
+ */
+export function getCustomAllocation(): StrategyAllocation | null {
+  if (typeof window === 'undefined') return null;
+
+  try {
+    const stored = localStorage.getItem(CUSTOM_ALLOCATION_KEY);
+    if (stored) {
+      return JSON.parse(stored) as StrategyAllocation;
+    }
+  } catch (error) {
+    console.error('Failed to get custom allocation:', error);
+  }
+
+  return null;
+}
+
+/**
+ * Clear custom allocation after deposit
+ */
+export function clearCustomAllocation(): void {
+  if (typeof window === 'undefined') return;
+
+  try {
+    localStorage.removeItem(CUSTOM_ALLOCATION_KEY);
+  } catch (error) {
+    console.error('Failed to clear custom allocation:', error);
+  }
 }
 
 /**

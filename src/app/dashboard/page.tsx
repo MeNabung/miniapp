@@ -288,24 +288,24 @@ export default function DashboardPage() {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-3 gap-3">
-        <button
-          onClick={() => alert("Deposit coming soon!")}
+        <Link
+          href="/deposit"
           className="flex flex-col items-center gap-2 py-4 bg-white border border-border rounded-xl active:bg-cream transition-colors"
         >
           <div className="w-10 h-10 rounded-full bg-teal/10 flex items-center justify-center">
             <Plus className="w-5 h-5 text-teal" />
           </div>
           <span className="text-xs font-medium text-foreground">Deposit</span>
-        </button>
-        <button
-          onClick={() => alert("Withdraw coming soon!")}
+        </Link>
+        <Link
+          href="/withdraw"
           className="flex flex-col items-center gap-2 py-4 bg-white border border-border rounded-xl active:bg-cream transition-colors"
         >
           <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center">
             <Minus className="w-5 h-5 text-gold-dark" />
           </div>
           <span className="text-xs font-medium text-foreground">Withdraw</span>
-        </button>
+        </Link>
         <button
           onClick={() => alert("Rebalance coming soon!")}
           className="flex flex-col items-center gap-2 py-4 bg-white border border-border rounded-xl active:bg-cream transition-colors"
