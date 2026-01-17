@@ -11,7 +11,7 @@ export const IDRX_ADDRESS =
 export const CONTRACT_ADDRESSES = {
   [base.id]: {
     idrx: IDRX_ADDRESS,
-    vault: "0xd3EE3ebB04A40B3a036b8c107dE4B95629A69620" as const,
+    vault: "0x6313640DCF1f30449b80867fFa6Ec2dA112B6Ae8" as const,
     thetanutsAdapter: "0xcAf11Df29AE619D5D5ea0BAFdf28Bc77e375D572" as const,
     aerodromeAdapter: "0x37400c08d59EE6e4Ab600FB7508EEd17ca9157FA" as const,
     stakingAdapter: "0x2dbEF1A046f86a78C014a9FeD5e694CD2a070e19" as const,
@@ -22,7 +22,7 @@ export type SupportedChainId = keyof typeof CONTRACT_ADDRESSES;
 
 export function getContractAddress(
   chainId: number,
-  contract: keyof (typeof CONTRACT_ADDRESSES)[typeof base.id]
+  contract: keyof (typeof CONTRACT_ADDRESSES)[typeof base.id],
 ): `0x${string}` {
   const addresses = CONTRACT_ADDRESSES[chainId as SupportedChainId];
   if (!addresses) {
