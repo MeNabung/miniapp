@@ -239,3 +239,11 @@ button[class*="ock-connect"]:active {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* OnchainKit z-index overrides - ensure modals/sheets appear above BottomNav (z-50) */
+[data-testid="ockSheet"],
+[data-testid="ockWalletModal"],
+[data-testid="ockWalletDropdown"],
+.ock\:z-40 {
+  z-index: 100 !important;
+}

@@ -2,7 +2,7 @@
 
 import { http, createConfig } from "wagmi";
 import { base } from "wagmi/chains";
-import { coinbaseWallet, injected } from "wagmi/connectors";
+import { coinbaseWallet } from "wagmi/connectors";
 
 export const wagmiConfig = createConfig({
   chains: [base],
@@ -11,7 +11,6 @@ export const wagmiConfig = createConfig({
       appName: "MeNabung",
       preference: "smartWalletOnly",
     }),
-    injected(),
   ],
   ssr: true,
   transports: {
