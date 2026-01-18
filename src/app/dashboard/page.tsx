@@ -149,7 +149,7 @@ export default function DashboardPage() {
               </div>
             </div>
           </ConnectWallet>
-          <WalletDropdown className="!min-w-[200px]">
+          <WalletDropdown className="!min-w-[200px] !z-[60]">
             <Identity address={address} className="px-4 pt-3 pb-2" hasCopyAddressOnClick>
               <Avatar />
               <Name />
