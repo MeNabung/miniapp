@@ -3,7 +3,18 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import { useAccount, useChainId } from "wagmi";
-import { ConnectWallet } from "@coinbase/onchainkit/wallet";
+import {
+  Wallet as WalletComponent,
+  ConnectWallet,
+  WalletDropdown,
+  WalletDropdownDisconnect,
+} from "@coinbase/onchainkit/wallet";
+import {
+  Identity,
+  Avatar,
+  Name,
+  Address,
+} from "@coinbase/onchainkit/identity";
 import {
   Wallet,
   TrendingUp,
@@ -118,18 +129,35 @@ export default function DashboardPage() {
 
   return (
     <div className="px-4 py-4 space-y-4">
-      {/* Header */}
+      {/* Header with Wallet Info */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg font-semibold text-foreground">Portfolio</h1>
           <p className="text-xs text-muted-foreground">Track your growth</p>
         </div>
-        <div className="text-right">
-          <p className="text-xs text-muted-foreground">Wallet</p>
-          <p className="text-sm font-medium tabular-nums">
-            {formattedIDRXBalance} IDRX
-          </p>
-        </div>
+        <WalletComponent>
+          <ConnectWallet className="!p-0 !bg-transparent !shadow-none">
+            <div className="flex items-center gap-2 px-3 py-2 bg-white border border-border rounded-xl">
+              <Identity address={address} className="!bg-transparent !p-0">
+                <Avatar className="w-6 h-6" />
+              </Identity>
+              <div className="text-right">
+                <p className="text-xs text-muted-foreground">Wallet</p>
+                <p className="text-sm font-medium tabular-nums">
+                  {formattedIDRXBalance} IDRX
+                </p>
+              </div>
+            </div>
+          </ConnectWallet>
+          <WalletDropdown className="!min-w-[200px]">
+            <Identity address={address} className="px-4 pt-3 pb-2" hasCopyAddressOnClick>
+              <Avatar />
+              <Name />
+              <Address />
+            </Identity>
+            <WalletDropdownDisconnect />
+          </WalletDropdown>
+        </WalletComponent>
       </div>
 
       {/* Main Balance Card */}

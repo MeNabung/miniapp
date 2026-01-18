@@ -1,6 +1,12 @@
 "use client";
 
-import { ReactNode, useEffect, useState, createContext, useContext } from "react";
+import {
+  ReactNode,
+  useEffect,
+  useState,
+  createContext,
+  useContext,
+} from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
 import { OnchainKitProvider } from "@coinbase/onchainkit";
@@ -43,12 +49,12 @@ export function Providers({ children }: ProvidersProps) {
       try {
         // Add timeout to prevent hanging
         const timeoutPromise = new Promise<boolean>((_, reject) =>
-          setTimeout(() => reject(new Error("SDK timeout")), 3000)
+          setTimeout(() => reject(new Error("SDK timeout")), 3000),
         );
 
         const inMiniApp = await Promise.race([
           sdk.isInMiniApp(),
-          timeoutPromise
+          timeoutPromise,
         ]).catch(() => false);
 
         if (inMiniApp) {
@@ -56,19 +62,21 @@ export function Providers({ children }: ProvidersProps) {
           sdk.actions.ready();
 
           // Get context (don't await, just set it when ready)
-          sdk.context.then((context) => {
-            setFarcasterState({
-              context,
-              isInMiniApp: true,
-              isReady: true,
+          sdk.context
+            .then((context) => {
+              setFarcasterState({
+                context,
+                isInMiniApp: true,
+                isReady: true,
+              });
+            })
+            .catch(() => {
+              setFarcasterState({
+                context: null,
+                isInMiniApp: true,
+                isReady: true,
+              });
             });
-          }).catch(() => {
-            setFarcasterState({
-              context: null,
-              isInMiniApp: true,
-              isReady: true,
-            });
-          });
         } else {
           // Not in mini-app, still mark as ready for web preview
           setFarcasterState({
@@ -103,6 +111,9 @@ export function Providers({ children }: ProvidersProps) {
                 logo: "/icon.png",
                 mode: "auto",
                 theme: "default",
+              },
+              wallet: {
+                display: "modal",
               },
             }}
           >
