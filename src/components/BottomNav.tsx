@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAccount } from "wagmi";
 import { MessageCircle, PieChart } from "lucide-react";
 
 // MVP: 2 tabs only - Chat and Portfolio
@@ -12,6 +13,12 @@ const tabs = [
 
 export function BottomNav() {
   const pathname = usePathname();
+  const { isConnected } = useAccount();
+
+  // Hide nav on homepage (splash) or when not connected
+  if (pathname === "/" || !isConnected) {
+    return null;
+  }
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-border pb-safe z-50">
